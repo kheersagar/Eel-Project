@@ -1,0 +1,50 @@
+.process-container{
+  padding: 1rem;
+}
+.cont-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search-field{
+  border: 1px solid;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  outline: none;
+}
+.running-process-cont{
+  margin-top: 1rem;
+}
+.process-table{
+  display: flex;
+  justify-content: space-evenly;
+}
+#rpc{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.process-name{
+display: none;
+}
+.process-label{
+  width: max-content;
+  border: 1px solid;
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.process-name:checked + label{
+  background-color: #047070;
+  color: white;
+  padding: 0.3rem 1rem;
+}
+#rpc{
+  margin-bottom: 2rem;
+}
+.measure-btn-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}

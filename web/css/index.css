@@ -1,0 +1,51 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.parent-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(97, 86, 255);
+}
+.login-cont{
+  box-shadow: 1px 1px 10px rgb(196, 196, 196);
+  border-radius: 10px;
+  padding: 2rem ;
+  max-width: 500px;
+  background-color: white;
+}
+.input-field{
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-direction: column;
+}
+.text-input{
+  border: 1px solid;
+  box-shadow: 1px 1px 10px #dfdfdf;
+  border-radius: 5px;
+  /* height: 30px; */
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+.text-input >input{
+  border: none;
+  outline: none;
+  width: 100%;
+}
+.new-account{
+  margin-top: 1rem;
+}
+.new-account-link{
+  color: rgb(0, 116, 116);
+  font-weight: 600;
+  cursor: pointer;
+}
+.new-account-link:hover{
+  text-decoration: underline;
+}
