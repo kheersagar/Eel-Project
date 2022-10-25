@@ -1,9 +1,8 @@
-from concurrent.futures import process
-import string
-from unittest import result
+
 import psutil
 import eel
-
+from srumutil import StartMeasuring, StopMeasuring
+from test import *
 eel.init('web')
 
 @eel.expose
@@ -13,7 +12,7 @@ def getProcess():
   for proc in psutil.process_iter():
     try:
         # Fetch process details as dict
-        pinfo = proc.as_dict(attrs=['pid', 'name', 'username','ppid','status'])
+        pinfo = proc.as_dict(attrs=['pid', 'name', 'username','ppid','status','exe'])
           
         if(type(pinfo['username']) is str and pinfo['username'] != 'None' and pinfo['status'] == psutil.STATUS_RUNNING ) : 
           
@@ -28,4 +27,11 @@ def getProcess():
   result = [listOfProcObjects]
   return result
 
-eel.start('index.html',)
+@eel.expose
+def startDPSService():
+  return StartMeasuring()
+
+@eel.expose
+def stopDPSService():
+  return StopMeasuring()
+eel.start('index.html')

@@ -43,6 +43,7 @@ let allProcess = [];
 
 const appendProcessElement = (arr)=>{
 const container = document.getElementById("rpc");
+container.innerHTML = ''
 Object.keys(arr).map((item,index)=>{
   const div = document.createElement('div')
   const process = document.createElement('input')

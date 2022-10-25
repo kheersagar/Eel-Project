@@ -107,9 +107,28 @@ const renderDonutChart = () =>{
   var chart = new ApexCharts(document.querySelector("#donutChart"), options);
   chart.render();
 }
-document.addEventListener("DOMContentLoaded", function() {
+
+const EnableStopMeasuringBtn = () =>{
+  const btn = document.createElement('button');
+  btn.innerText = 'Stop Measuring'
+  btn.onclick = async () =>{
+    console.log("clicked")
+    const res = await eel.stopDPSService()();
+    console.log(res)
+  }
+  document.getElementById('btn-cont').appendChild(btn)
+}
+document.addEventListener("DOMContentLoaded",  function() {
   renderBarChart();
   renderLineChart('lineChart','Carbon Emission (gCo2eq)');
   renderLineChart('lineChart2','Energy Consumption (Wh)');
   renderDonutChart();
+  const btn = document.getElementById('start');
+  btn.addEventListener('click', async ()=>{
+    console.log("Started")
+    const res = await eel.startDPSService()();
+    console.log(res)
+    setTimeout(EnableStopMeasuringBtn,1000*60*1)
+  })
+
 });
