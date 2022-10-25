@@ -1,27 +1,209 @@
 .measure-container {
   display: flex;
-  padding: 1rem;
-  height: 100%;
+  height: 85vh;
 }
+
 .chart-container {
   display: flex;
   align-items: end;
   flex-direction: column;
   gap: 1rem;
-  flex: 1;
+  flex: 3;
 }
+
 .chart-container-row {
   display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  width: 100%;
+  height: 50%;
 }
+
 .title-cont {
   padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+  gap: 2rem;
+}
+.title-cont-first{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 .title {
   font-weight: 600;
   font-size: 2rem;
 }
+
+.left-arrow {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 .title-add {
   font-size: 2rem;
   font-weight: 500;
   opacity: 0.6;
+}
+
+.measuring-status {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delay1 {
+  animation: waves 2.5s linear infinite;
+  animation-delay: .1s;
+}
+
+.delay2 {
+  animation: waves 2.5s linear .7s forwards infinite,
+}
+
+.delay3 {
+  animation: waves 2.5s linear 1.3s forwards infinite;
+}
+
+.delay4 {
+  animation: waves 2.5s linear 1.9s forwards infinite;
+}
+
+.circle {
+  display: block;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background: #0194c7;
+  margin: 10px;
+  transition: 5s ease;
+  position: absolute;
+  top: 0px
+}
+
+@-webkit-keyframes waves {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.measure-left-section {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 2rem;
+}
+
+.measuring-status-title {
+  position: absolute;
+  top: 2.5rem;
+  z-index: 2;
+  font-size: 0.8rem;
+  color: white;
+  font-weight: 500;
+}
+
+.measured-success {
+  display: none;
+}
+
+.battery-img {
+  width: 100px;
+  transform: rotateZ(-90deg);
+}
+.factory-img{
+  width: 100px;
+}
+.section-title {
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#others-input-country {
+  margin: 1rem 0;
+  border-radius: 10px;
+  border: none;
+  padding: 0.5rem;
+  box-shadow: 1px 1px 6px gray;
+}
+
+#carbon-intensity-selected {
+  position: relative;
+  min-width: 250px;
+  box-shadow: 1px 1px 10px #c1bbbb;
+  color: white;
+}
+
+#carbon-intensity-selected.dropdown-toggle::after {
+  position: absolute;
+  right: 1rem;
+  top: 1.3rem;
+}
+
+.title-intensity-selector {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.country-dropdown {
+  margin: 0.5rem 0;
+}
+
+#emission-value {
+  max-width: 100px;
+  overflow-wrap: anywhere;
+}
+
+#start-measuring-btn {
+  display: none;
+}
+
+.equivalent-cont {
+  display: none;
+}
+
+.exemplary-value-cont {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.text-additional {
+  font-size: 0.9rem;
+}
+
+.value-bold {
+  font-weight: bold;
+}
+.carbon-intensity-cont{
+
+}
+.equivalent-cont{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.energy-consumption-cont,
+.carbon-intensity-cont,
+.carbon-emission-cont,
+.equivalent-cont {
+  width: 100%;
+  text-align: center;
 }

@@ -1,63 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
+ 
+  <!DOCTYPE html>
+  <html lang="en">
+  
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Measure Process</title>
     <!-- css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/measure.css" />
     <!-- js -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="eel.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/measure.js"></script>
   </head>
-
+  
   <body>
     <div class="title-cont">
-      <span class="title">Sie-Carbonizer</span>
-      <span class="title-add">is in action !</span>
+      <div class="title-cont-first">
+        <a href="./process.html">
+          <img src="./assets/left-arrow.svg" class="left-arrow" />
+        </a>
+        <span class="title">Sie-Carbonizer</span>
+        <span class="title-add">is in action !</span>
+      </div>
+      <div>
+  
+        <button onclick="stopMeasuring();" class="btn btn-outline-danger" id="stop-measuring-btn">Stop Measuring</button>
+        <button onclick="startMeasuring();" class="btn btn-outline-success" id="start-measuring-btn">Measuring
+          Again</button>
+      </div>
     </div>
     <div class="measure-container">
-      <div class="">
-        <div>measure</div>
-        <div>energy consumption</div>
-        <div>carbon emmssion</div>
+      <div class="measure-left-section">
+  
+        <div class="measuring-status">
+          <div class="measuring-status-title">Measuring</div>
+          <div class="circle delay1"></div>
+          <div class="circle delay2"></div>
+          <div class="circle delay3"></div>
+          <div class="circle delay4"></div>
+        </div>
+        <div class="measured-success">Successfully Measured</div>
+        <div class="energy-consumption-cont">
+          <div class="card text-white bg-success  mb-3" style="max-width: 18rem;">
+            <div class="card-header section-title">energy consumption</div>
+            <div class="card-body d-flex justify-content-center align-items-center p-0 gap-1">
+              <div><img src="./assets/battery.svg" class="battery-img" /></div>
+              <div id="energy-value">-- mWh</div>
+  
+            </div>
+          </div>
+        </div>
+  
+        <div class="carbon-intensity-cont">
+          <div class="card text-white bg-success  mb-3" style="max-width: 18rem;">
+            <div class="card-header title-intensity-selector ">Carbon Intensity (gCO2eq/kWh)</div>
+            <div class="card-body d-flex flex-column justify-content-center align-items-center p-0">
+              <div class="dropdown country-dropdown">
+                <button class="btn  btn-lg dropdown-toggle" id="carbon-intensity-selected" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  India
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item carbon-intensity-country" type="button">India</button></li>
+                  <li><button class="dropdown-item carbon-intensity-country" type="button">USA</button></li>
+                  <li><button class="dropdown-item carbon-intensity-country" type="button">Germany</button></li>
+                  <li><button class="dropdown-item " id="others-country" type="button">Others</button></li>
+                </ul>
+              </div>
+              <input id="others-input-country" type="number" style="display: none;" />
+  
+            </div>
+          </div>
+        </div>
+        <div class="carbon-emission-cont">
+          <div class="card text-white bg-success  mb-3" style="max-width: 18rem;">
+            <div class="card-header section-title">carbon emission</div>
+            <div class="card-body d-flex justify-content-center align-items-center p-0 gap-1">
+              <div><img src="./assets/factory.svg" class="factory-img" /></div>
+              <div id="emission-value">-- gCO2e</div>
+  
+            </div>
+          </div>
+          
+        </div>
+        <div class="equivalent-cont">
+          <div class="card text-white bg-success  mb-3" style="max-width: 18rem;">
+            <div class="card-header section-title">Exemplary Equivalent</div>
+            <div class="card-body text-end">
+  
+              <div id="equi"></div>
+              <div class="text-additional">An email with attachment emits</div>
+              <div class="text-additional">approximately 50 grams of CO2e</div>
+  
+  
+            </div>
+          </div>
+        </div>
       </div>
       <div class="chart-container">
         <div class="chart-container-row">
-          <div style="min-width: 400px; min-height: 300px">
-            <div id="lineChart"></div>
-          </div>
-          <div style="min-width: 400px; min-height: 300px">
-            <div id="donutChart"></div>
+          <div style="width: 100%; height: 100%;">
+            <div id="lineChart" style="width: 100%;height:100%;"></div>
           </div>
         </div>
         <div class="chart-container-row">
-          <div style="min-width: 400px; min-height: 300px">
-            <div id="lineChart2"></div>
-          </div>
-          <div style="min-width: 400px; min-height: 300px">
-            <div id="chart"></div>
+          <div style="width: 100%; height: 100%;">
+            <div id="lineChart2" style="width: 100%;height:100%;"></div>
           </div>
         </div>
       </div>
     </div>
-    <div id="btn-cont">
+  </div>
+  <div id="btn-cont">
 
-      <button id="start" type="button">start</button>
-    </div>
+    <button id="start" type="button">start</button>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
   </body>
-</html>
+  
+  </html>
