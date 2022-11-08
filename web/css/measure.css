@@ -175,10 +175,6 @@
   display: none;
 }
 
-.equivalent-cont {
-  display: none;
-}
-
 .exemplary-value-cont {
   margin-top: 1rem;
   text-align: right;
@@ -195,7 +191,6 @@
 
 }
 .equivalent-cont{
-  display: none;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 1rem;

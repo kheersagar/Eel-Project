@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./css/utility.css">
+  <!-- js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script src="eel.js"></script>
+  <script src="./js/main.js"></script>
+</head>
+
+<body>
+  <div class="container process-container">
+    <div class="cont-header">
+      <div>
+        <div class="h2">Welcome Kheersagar, to Sie-Carbonizer Suite</div>
+        <div>Choose one to measure the Energy consumption and Carbon emission</div>
+      </div>
+    </div>
+    <div class="utility-option-cont">
+      <form class="utility-card-form" action="./process.html">
+        <fieldset>
+          <div class="utility-card">
+            <div>
+              <div class="utility-card-title">Srumutil</div>
+              <div class="utility-card-subtitle">Get application specific Energy consumption.</div>
+            </div>
+            <div class="utility-card-features-cont">
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> Can run only on battery-powered windows devices.</div>
+              </div>
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> Requires windows 8 or more.​</div>
+              </div>
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> No support for Linux or macOS.​</div>
+              </div>
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> Waiting time atleast a minute​</div>
+              </div>
+            </div>
+            <div class="utility-card-btn-cont">
+              <a href="./process.html">
+                <button type="button" class="btn btn-outline-primary select-btn">Select
+                </button>
+              </a>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+      <!--  -->
+      <form class="utility-card-form" action="./measure.html">
+        <fieldset>
+
+          <div class="utility-card">
+            <div>
+              <div class="utility-card-title">Intel Power Gadget</div>
+              <div class="utility-card-subtitle">Intel power gadget can measure energy consumption of whole system.
+              </div>
+            </div>
+            <div class="utility-card-features-cont">
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> Can run only on systems with Intel Processor </div>
+              </div>
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> Cannot run-on servers with Xeon or Atom chips​ </div>
+              </div>
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc"> Only for 2nd Generation up to 10th Generation Intel Core </div>
+              </div>
+              <div class="utility-card-features">
+                <div>
+                  <img src="./assets/checkmark.svg" alt="" class="checkmark-icon">
+                </div>
+                <div class="feature-desc">No waiting Time</div>
+              </div>
+            </div>
+            <div class="utility-card-btn-cont">
+              <a href="./measure.html"><button type="button" class="btn btn-outline-primary
+                    select-btn">Select</button></a>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const res = await eel.checkSystem()();
+    console.log(res)
+    const utilityCard = document.getElementsByClassName('utility-card-form')
+    if (res.srumutil === false) {
+      utilityCard[0][0].style.opacity = 0.4
+      utilityCard[0][0].style.pointerEvents = 'none'
+      utilityCard[0][0].disabled = 'disabled'
+    }
+    if (res.ipg === false) {
+      utilityCard[1][0].style.opacity = 0.4
+      utilityCard[1][0].style.pointerEvents = 'none'
+      utilityCard[1][0].disabled = 'disabled'
+    }
+  })
+</script>
+
+</html>

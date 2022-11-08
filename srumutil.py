@@ -1,9 +1,10 @@
+import json
 import os
 import subprocess
 import time
 import ctypes, sys
 import pandas as pd
-
+import re
 def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
@@ -39,18 +40,41 @@ def StartMeasuring():
 
 def StopMeasuring():
   print("exporting csv file")
-  reportOutput = subprocess.run('powercfg /srumutil',shell=True, cwd='C:\\Windows\\System32')
+  reportOutput = subprocess.run('powercfg /srumutil',shell=True, cwd='C:\\Users')
   print(reportOutput)
   if reportOutput.returncode == 0:
     return {"status":reportOutput.returncode,"message" : "Successfully Generated Report"}
   else:
     return {"status":reportOutput.returncode,"message" : "Some Error Occured"}
 
-def readCSV():
-  df = pd.read_csv("C:\\Windows\\System32\\srumutil.csv")
-  app = df[df['AppId'].str.contains('EMi_RAPL_Package0_PKG',case=False)]
-  print(app.columns)
-  print(app.cumsum())
-  print(app[' TotalEnergyConsumption'].cumsum())
+def readCSV(AppId,name):
+  print(AppId,name)
+  df = pd.read_csv('C:\\Users\\srumutil.csv')
+  app = df[df['AppId'].str.contains(re.escape(AppId) ,case=False) | df['AppId'].str.contains(re.escape(name) ,case=False)]
+  totalEngCon = app[' TotalEnergyConsumption'].cumsum().iloc[-1]
+  CPUEngCon = app[' CPUEnergyConsumption'].cumsum().iloc[-1]
+  SocEngCon = app[' SocEnergyConsumption'].cumsum().iloc[-1]
+  DisplayEngCon = app[' DisplayEnergyConsumption'].cumsum().iloc[-1]
+  DiskEngCon = app[' DiskEnergyConsumption'].cumsum().iloc[-1]
+  NetworkEngCon = app[' NetworkEnergyConsumption'].cumsum().iloc[-1]
+  OtherEngCon = app[' OtherEnergyConsumption'].cumsum().iloc[-1]
+  EmiEngCon = app[' EmiEnergyConsumption'].cumsum().iloc[-1]
+  CPUEngConWorkOnBehalf = app[' CPUEnergyConsumptionWorkOnBehalf'].cumsum().iloc[-1]
+  CPUEngConAttributed = app[' CPUEnergyConsumptionAttributed'].cumsum().iloc[-1]
+  # print("json" , json.dumps(result))
+  print(app)
+  return {
+    "TotalEnergyConsumption" : int(totalEngCon),
+    "CPUEnergyConsumption" : int(CPUEngCon),
+    "SocEnergyConsumption" : int(SocEngCon),
+    "DisplayEnergyConsumption" : int(DisplayEngCon),
+    "DiskEnergyConsumption" : int(DiskEngCon),
+    "NetworkEnergyConsumption" : int(NetworkEngCon),
+    "OtherEnergyConsumption" : int(OtherEngCon),
+    "EmiEnergyConsumption" : int(EmiEngCon),
+    "CPUEnergyConsumptionWorkOnBehalf" : int(CPUEngConWorkOnBehalf),
+    "CPUEnergyConsumptionAttributed" : int(CPUEngConAttributed),
+    }
+
 if __name__ == "__main__":
-  readCSV()
+ readCSV('Windows\System32\conhost.exe','whatsapp')

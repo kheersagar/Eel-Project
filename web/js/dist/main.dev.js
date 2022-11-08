@@ -47,12 +47,13 @@ var allProcess = [];
 
 var appendProcessElement = function appendProcessElement(arr) {
   var container = document.getElementById("rpc");
+  container.innerHTML = '';
   Object.keys(arr).map(function (item, index) {
     var div = document.createElement('div');
     var process = document.createElement('input');
     process.classList.add('process-name');
     process.type = 'radio';
-    process.value = item.name;
+    process.value = arr[item][0].exe.substr(3).replaceAll('\\', '\\\\').replace(/\\\\/g, "\\");
     process.name = "process-name";
     process.id = index;
     process.onclick = addMeasureBtn;
@@ -116,6 +117,7 @@ var findProcess = function findProcess() {
 
 var addMeasureBtn = function addMeasureBtn() {
   var input = document.querySelectorAll('input[name="process-name"]:checked');
+  sessionStorage.setItem('selected-application', input[0].value);
   var parent = document.getElementsByClassName('measure-btn-div');
 
   if (input && parent[0].children.length === 0) {

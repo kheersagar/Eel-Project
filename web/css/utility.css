@@ -1,0 +1,55 @@
+.process-container{
+  padding: 1rem;
+}
+.cont-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.utility-option-cont{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+.utility-card-form{
+  flex: 1;
+}
+.utility-card{
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px lightgrey;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.1s linear ;
+}
+.utility-card:hover{
+  transform: scale(1.025);
+  background-color: #45d6d3;
+}
+.utility-card-title{
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.utility-card-features-cont{
+  margin-top: 2rem;
+}
+.utility-card-features{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.checkmark-icon{
+  width: 25px;
+}
+.utility-card-btn-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.select-btn{
+  width: 200px;
+}

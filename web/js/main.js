@@ -39,23 +39,30 @@
 
 // 
 let allProcess = [];
+let sortedKey = [];
 
 
 const appendProcessElement = (arr)=>{
+const applicationNameSet = new Set();
 const container = document.getElementById("rpc");
 container.innerHTML = ''
 Object.keys(arr).map((item,index)=>{
+  //checking for duplication application name
+  if(applicationNameSet.has( arr[sortedKey[index]][0].name)) return ;
+  else applicationNameSet.add(arr[sortedKey[index]][0].name)
+
   const div = document.createElement('div')
   const process = document.createElement('input')
   process.classList.add('process-name')
   process.type ='radio';
-  process.value = item.name
-  process.name = "process-name"
+  process.value = arr[sortedKey[index]][0].exe?.substr(3).replaceAll('\\','\\\\').replace(/\\\\/g, "\\")
+  process.name = 'process-name'
+  process.setAttribute('data-app-name',arr[sortedKey[index]][0].name.split(".").slice(0,-1).join('.'))
   process.id=index
   process.onclick = addMeasureBtn
 
   const label = document.createElement('label')
-  label.innerText = arr[item][0].name
+  label.innerText = arr[sortedKey[index]][0].name
   label.className = 'process-label'
   label.htmlFor = index
 
@@ -69,6 +76,8 @@ const getProcess = async ()=>{
 const res = await  eel.getProcess()();
 console.log(res)
 allProcess = res[0];
+const allProcessKeys = Object.keys(allProcess)
+sortedKey = allProcessKeys.sort((a,b)=> (allProcess[a][0]['name']).localeCompare(allProcess[b][0]['name']))
 appendProcessElement(allProcess)
 }
 
@@ -84,16 +93,18 @@ const findProcess = () =>{
     // Convert the key/value array back to an object:
   // `{ name: 'Luke Skywalker', title: 'Jedi Knight' }`
     const result =  Object.fromEntries(filteredData);
-    const parent = document.getElementById('rpc');
-    parent.innerHTML = ""
+    sortedKey = Object.keys(result).sort((a,b) => a-b)
     appendProcessElement(result)
   }else{
+    sortedKey = Object.keys(allProcess).sort((a,b)=> (allProcess[a][0]['name']).localeCompare(allProcess[b][0]['name']))    
     appendProcessElement(allProcess)
   }
 }
 
 const addMeasureBtn = () =>{
  const input =  document.querySelectorAll('input[name="process-name"]:checked')
+ sessionStorage.setItem('selected-application-path',input[0].value)
+ sessionStorage.setItem('selected-application-name',input[0].dataset.appName)
  const parent =  document.getElementsByClassName('measure-btn-div');
  if(input &&  parent[0].children.length === 0){
     const btn = document.createElement('button');

@@ -6,6 +6,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.left-arrow{
+  width: 30px;
+}
 .search-field{
   border: 1px solid;
   padding: 0.5rem 1rem;
